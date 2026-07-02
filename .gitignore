@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+
+# Local IDE / agent settings (do not push to public portfolio repo)
+.claude/
+
+# Company BQ source data (keep local, never commit)
+sample/*.xlsx
+# ...except the anonymized demo data used by the public app
+!sample/demo_Previous_BQ.xlsx
+!sample/demo_Revised_BQ.xlsx
+
+# Generated comparison outputs
+sample/BQ_comparison_result.csv
+sample/BQ_changes_only.csv
+sample/BQ_rate_comparison_result.csv
+sample/BQ_rate_changes_only.csv
+sample/Previous_BQ_long.csv
+
+# Temp verification scratch files
+sample/_test_*
+sample/_verify_*
+sample/_st_run.log
