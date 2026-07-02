@@ -4,6 +4,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+import altair as alt
 import pandas as pd
 import streamlit as st
 
@@ -65,13 +66,24 @@ st.markdown(
 st.title("Project Delta")
 st.caption("BQ Revision Comparison Tool · V1.1")
 
-use_demo = st.checkbox(
-    "샘플 데이터로 체험하기 (업로드 없이 익명화된 데모 BQ 실행)", value=False,
-    help="회사 데이터를 익명화한 샘플 BQ로 모든 탭 기능을 바로 확인할 수 있습니다.",
-)
+with st.sidebar:
+    st.markdown("### 📊 Project Delta")
+    st.caption("BQ Revision Comparison Tool")
+    st.divider()
 
-previous_file = st.file_uploader("Previous BQ", type=["xlsx"], disabled=use_demo)
-revised_file = st.file_uploader("Revised BQ", type=["xlsx"], disabled=use_demo)
+    st.markdown("#### 데이터 입력")
+    use_demo = st.checkbox(
+        "샘플 데이터로 체험하기", value=False,
+        help="회사 데이터를 익명화한 샘플 BQ로 모든 탭 기능을 바로 확인할 수 있습니다.",
+    )
+    if use_demo:
+        st.caption("업로드 없이 익명화된 데모 BQ로 실행합니다.")
+
+    previous_file = st.file_uploader("Previous BQ", type=["xlsx"], disabled=use_demo)
+    revised_file = st.file_uploader("Revised BQ", type=["xlsx"], disabled=use_demo)
+
+    st.divider()
+    st.caption("v1.1 · Built with Streamlit")
 
 
 @st.cache_data(show_spinner="Quantity 비교 중...")
@@ -297,14 +309,14 @@ if use_demo:
         st.stop()
     prev_bytes, rev_bytes = _DEMO_PREV.read_bytes(), _DEMO_REV.read_bytes()
     prev_name, rev_name = _DEMO_PREV.name, _DEMO_REV.name
-    st.success("샘플 데이터로 실행 중입니다 (익명화된 데모 BQ).")
+    st.sidebar.success("샘플 데이터로 실행 중 (익명화된 데모 BQ)")
 elif previous_file and revised_file:
-    st.success("두 파일 업로드 완료!")
+    st.sidebar.success("두 파일 업로드 완료")
     prev_bytes, rev_bytes = previous_file.getvalue(), revised_file.getvalue()
     prev_name, rev_name = previous_file.name, revised_file.name
 else:
-    st.info("Previous BQ 와 Revised BQ 파일을 모두 업로드하거나, "
-            "상단의 '샘플 데이터로 체험하기'를 켜세요.")
+    st.info("👈 왼쪽 사이드바에서 Previous / Revised BQ 파일을 업로드하거나 "
+            "'샘플 데이터로 체험하기'를 켜세요.")
     st.stop()
 
 try:
@@ -346,6 +358,28 @@ with tab_summary:
     m1.metric("Quantity Changed", f"{q_chg:,}")
     m2.metric("Rate/Cost Changed", f"{r_chg:,}")
     m3.metric("Revision Type", rtype)
+
+    st.divider()
+    st.markdown("##### 변경 건수 요약")
+    _chg_df = pd.DataFrame(
+        {"구분": ["Quantity", "Rate / Cost"], "변경 건수": [q_chg, r_chg]}
+    )
+    _chg_chart = (
+        alt.Chart(_chg_df)
+        .mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, size=70)
+        .encode(
+            x=alt.X("구분:N", axis=alt.Axis(labelAngle=0, title=None)),
+            y=alt.Y("변경 건수:Q", title=None),
+            color=alt.Color(
+                "구분:N",
+                scale=alt.Scale(domain=["Quantity", "Rate / Cost"],
+                                range=["#5b6cff", "#22c1a4"]),
+                legend=None),
+            tooltip=["구분", "변경 건수"],
+        )
+        .properties(height=260)
+    )
+    st.altair_chart(_chg_chart, use_container_width=True)
 
     comment = revision_comment(qty_result, rate_result)
     (st.info if rtype == "No Revision Detected" else st.success)(
@@ -395,6 +429,21 @@ with tab_rate:
                .reindex(ITEM_ORDER, fill_value=0))
     summary_t = _counts.to_frame("Changed Count").T   # 1행(Changed Count) × 항목 컬럼
     st.dataframe(summary_t, use_container_width=True)
+
+    _counts_df = _counts.rename_axis("Compare Item").reset_index(name="Changed Count")
+    if _counts_df["Changed Count"].sum() > 0:
+        _rate_chart = (
+            alt.Chart(_counts_df)
+            .mark_bar(cornerRadiusTopRight=4, cornerRadiusBottomRight=4)
+            .encode(
+                x=alt.X("Changed Count:Q", title=None),
+                y=alt.Y("Compare Item:N", sort="-x", title=None),
+                color=alt.value("#5b6cff"),
+                tooltip=["Compare Item", "Changed Count"],
+            )
+            .properties(height=280)
+        )
+        st.altair_chart(_rate_chart, use_container_width=True)
 
     f1, f2, f3, f4 = st.columns([2, 2.4, 2, 1.6])
     r_fwbs = f1.text_input("FWBS 검색", key="r_fwbs")
@@ -644,6 +693,32 @@ with tab_major:
                 st.markdown(summary_group_legend(), unsafe_allow_html=True)
                 st.dataframe(style_major_summary(summary_disp),
                              use_container_width=True, hide_index=True)
+
+                _mi = s_view.assign(
+                    _diff=(s_view["Total_Cost_Revised"]
+                           - s_view["Total_Cost_Previous"]).round(6))
+                _mi = _mi[_mi["_diff"] != 0]
+                if not _mi.empty:
+                    _mi_df = pd.DataFrame({
+                        "Major Item": _mi["Major_Item"].astype(str).values,
+                        "Cost Difference": _mi["_diff"].values,
+                    })
+                    _mi_chart = (
+                        alt.Chart(_mi_df)
+                        .mark_bar()
+                        .encode(
+                            x=alt.X("Cost Difference:Q", title=None),
+                            y=alt.Y("Major Item:N", sort="-x", title=None),
+                            color=alt.condition(
+                                "datum['Cost Difference'] > 0",
+                                alt.value("#1e7e34"), alt.value("#c0392b")),
+                            tooltip=["Major Item", "Cost Difference"],
+                        )
+                        .properties(height=280)
+                    )
+                    st.caption("Major Item별 금액 영향 (Cost Difference)")
+                    st.altair_chart(_mi_chart, use_container_width=True)
+
                 with st.expander("Copy Major Item Summary as TSV"):
                     st.code(summary_disp.to_csv(sep="\t", index=False), language="text")
 
