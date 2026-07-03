@@ -218,12 +218,8 @@ if not st.session_state.pd_started:
           <div class="pd-hero-title">Project Delta</div>
           <div class="pd-hero-author">By. Soyoung Katie Park</div>
           <div class="pd-hero-subtitle">
-            Civil BQ Revision을 자동 비교해 물량 · 단가 · 금액 영향과<br>
-            단가 불일치를 빠르게 검토하는 Cost Review Prototype
-          </div>
-          <div class="pd-hero-desc">
-            Previous / Revised BQ를 업로드하면 Quantity Change, Rate / Cost Change,
-            Major Item Summary, Rate Consistency를 한 화면에서 확인할 수 있습니다.
+            Previous / Revised Civil BQ를 자동 비교해 물량·단가·금액 영향과<br>
+            Rate Consistency 이슈를 한 화면에서 검토하는 Cost Review Dashboard
           </div>
         </div>
         """,
