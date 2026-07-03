@@ -58,10 +58,274 @@ st.markdown(
         font-size: 1.02rem;
         line-height: 1.5;
       }
+
+      /* ---- 랜딩(첫 화면) 전용 ------------------------------------------ */
+      .pd-hero {
+        text-align: center;
+        padding: 40px 0 8px 0;
+      }
+      .pd-hero-label {
+        font-size: .8rem;
+        letter-spacing: .34em;
+        color: #2563eb;
+        font-weight: 700;
+      }
+      .pd-hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-top: 14px;
+        background: linear-gradient(90deg, #16336b 0%, #2563eb 65%, #3b82f6 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .pd-hero-author {
+        font-size: .95rem;
+        color: #64748b;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+      .pd-hero-subtitle {
+        font-size: 1.12rem;
+        color: #1e293b;
+        font-weight: 600;
+        margin-top: 20px;
+        line-height: 1.6;
+      }
+      .pd-hero-desc {
+        font-size: .98rem;
+        color: #64748b;
+        margin-top: 12px;
+        line-height: 1.7;
+        max-width: 760px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .pd-section-title {
+        font-size: .78rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        font-weight: 700;
+        margin: 4px 0 14px 2px;
+      }
+
+      /* 효능 카드 */
+      .pd-benefit {
+        background: #ffffff;
+        border: 1px solid #e6eaf1;
+        border-radius: 14px;
+        padding: 18px 18px;
+        box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
+        height: 100%;
+      }
+      .pd-benefit .pd-ico {
+        width: 40px; height: 40px;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 10px;
+        background: #eef4ff;
+        color: #2563eb;
+        font-size: 1.15rem;
+        margin-bottom: 12px;
+      }
+      .pd-benefit .pd-bt {
+        font-size: .96rem; font-weight: 700; color: #16233c;
+        line-height: 1.35; word-break: keep-all;
+      }
+
+      /* Impact metric */
+      .pd-metric {
+        background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+        border: 1px solid #e2e8f2;
+        border-radius: 14px;
+        padding: 18px 20px;
+        box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
+        height: 100%;
+      }
+      .pd-metric .pd-mv {
+        font-size: 2.05rem; font-weight: 800; line-height: 1.1;
+        color: #16336b;
+      }
+      .pd-metric .pd-ml {
+        font-size: .82rem; color: #64748b; margin-top: 6px; font-weight: 500;
+      }
+
+      /* Workflow step */
+      .pd-step {
+        background: #ffffff;
+        border: 1px solid #e6eaf1;
+        border-radius: 14px;
+        padding: 18px 18px 20px 18px;
+        box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
+        height: 100%;
+        position: relative;
+      }
+      .pd-step .pd-num {
+        font-size: .78rem; font-weight: 800; color: #93a4c4;
+        letter-spacing: .08em;
+      }
+      .pd-step .pd-sico {
+        font-size: 1.35rem; margin: 8px 0 8px 0;
+      }
+      .pd-step .pd-stt {
+        font-size: .98rem; font-weight: 700; color: #16233c;
+      }
+      .pd-step .pd-sd {
+        font-size: .84rem; color: #64748b; margin-top: 5px; line-height: 1.45;
+      }
+
+      /* Feature 카드 (재디자인) */
+      .pd-feat {
+        background: #ffffff;
+        border: 1px solid #e6eaf1;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(16, 24, 40, 0.05);
+        height: 100%;
+        border-top: 3px solid #2563eb;
+      }
+      .pd-feat .pd-ft {
+        font-size: 1.02rem; font-weight: 700; color: #16233c;
+      }
+      .pd-feat .pd-fd {
+        font-size: .86rem; color: #64748b; margin-top: 8px; line-height: 1.5;
+      }
+
+      .pd-note {
+        text-align: center;
+        font-size: .8rem;
+        color: #94a3b8;
+        margin-top: 8px;
+        line-height: 1.6;
+      }
     </style>
     """,
     unsafe_allow_html=True,
 )
+
+# ---- 시작(랜딩) 화면 ----------------------------------------------------------
+if "pd_started" not in st.session_state:
+    st.session_state.pd_started = False
+
+if not st.session_state.pd_started:
+    # ---- Hero ----------------------------------------------------------------
+    st.markdown(
+        """
+        <div class="pd-hero">
+          <div class="pd-hero-label">BQ REVISION COMPARISON</div>
+          <div class="pd-hero-title">Project Delta</div>
+          <div class="pd-hero-author">By. Soyoung Katie Park</div>
+          <div class="pd-hero-subtitle">
+            Civil BQ Revision을 자동 비교해 물량 · 단가 · 금액 영향과<br>
+            단가 불일치를 빠르게 검토하는 Cost Review Prototype
+          </div>
+          <div class="pd-hero-desc">
+            Previous / Revised BQ를 업로드하면 Quantity Change, Rate / Cost Change,
+            Major Item Summary, Rate Consistency를 한 화면에서 확인할 수 있습니다.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # ---- 효능/효과 카드 -------------------------------------------------------
+    st.write("")
+    _benefits = [
+        ("⏱", "반복 비교 작업<br>시간 단축"),
+        ("⚠", "주요 단가 불일치<br>자동 식별"),
+        ("📊", "Major Item 중심<br>금액 영향 검토"),
+        ("📄", "보고용 Summary / TSV<br>즉시 활용"),
+    ]
+    for col, (icon, t) in zip(st.columns(4), _benefits):
+        col.markdown(
+            f'<div class="pd-benefit">'
+            f'<div class="pd-ico">{icon}</div>'
+            f'<div class="pd-bt">{t}</div></div>',
+            unsafe_allow_html=True,
+        )
+
+    # ---- Impact Metrics ------------------------------------------------------
+    st.write("")
+    st.write("")
+    st.markdown('<div class="pd-section-title">Impact Metrics · sample data</div>',
+                unsafe_allow_html=True)
+    _metrics = [
+        ("5,000+", "BOQ Rows Analyzed"),
+        ("8", "Cost Components Checked"),
+        ("567", "Dummy Rows Filtered"),
+        ("1", "Rate Mismatch Detected"),
+    ]
+    for col, (v, l) in zip(st.columns(4), _metrics):
+        col.markdown(
+            f'<div class="pd-metric"><div class="pd-mv">{v}</div>'
+            f'<div class="pd-ml">{l}</div></div>',
+            unsafe_allow_html=True,
+        )
+
+    # ---- Workflow ------------------------------------------------------------
+    st.write("")
+    st.write("")
+    st.markdown('<div class="pd-section-title">How it works</div>',
+                unsafe_allow_html=True)
+    _steps = [
+        ("01", "⬆", "Upload", "Previous / Revised BQ 업로드"),
+        ("02", "⇄", "Compare", "FWBS, PABS, Unit Rate 기준 자동 비교"),
+        ("03", "🔍", "Review", "Major Item, Rate Consistency, Cost Impact 검토"),
+        ("04", "📋", "Report", "보고용 Summary / TSV 복사"),
+    ]
+    for col, (num, icon, t, d) in zip(st.columns(4), _steps):
+        col.markdown(
+            f'<div class="pd-step"><div class="pd-num">STEP {num}</div>'
+            f'<div class="pd-sico">{icon}</div>'
+            f'<div class="pd-stt">{t}</div>'
+            f'<div class="pd-sd">{d}</div></div>',
+            unsafe_allow_html=True,
+        )
+
+    # ---- 기능 카드 (재디자인) -------------------------------------------------
+    st.write("")
+    st.write("")
+    st.markdown('<div class="pd-section-title">What you get</div>',
+                unsafe_allow_html=True)
+    _features = [
+        ("Quantity Changes", "FWBS × PABS 기준 물량 변경 추적"),
+        ("Rate / Cost", "Manhour, Labor, Material, Equipment 등 단가 변경 분석"),
+        ("Major Items", "대표 공종별 물량 · 단가 · 금액 영향 요약"),
+        ("Report / Copy", "보고용 검토 결과 복사"),
+    ]
+    for col, (t, d) in zip(st.columns(4), _features):
+        col.markdown(
+            f'<div class="pd-feat"><div class="pd-ft">{t}</div>'
+            f'<div class="pd-fd">{d}</div></div>',
+            unsafe_allow_html=True,
+        )
+
+    # ---- CTA 버튼 ------------------------------------------------------------
+    st.write("")
+    st.write("")
+    bc = st.columns([1.3, 1, 1, 1.3])
+    with bc[1]:
+        if st.button("샘플 데이터로 시연하기", type="primary", use_container_width=True):
+            st.session_state.pd_started = True
+            st.session_state.use_demo = True
+            st.rerun()
+    with bc[2]:
+        if st.button("BQ 파일 업로드로 시작하기", use_container_width=True):
+            st.session_state.pd_started = True
+            st.session_state.use_demo = False
+            st.rerun()
+
+    # ---- 하단 note -----------------------------------------------------------
+    st.write("")
+    st.markdown(
+        '<div class="pd-note">Local-first prototype&nbsp;·&nbsp;'
+        'Company BQ files are excluded from Git tracking&nbsp;·&nbsp;'
+        'Built with Python, pandas, openpyxl, Streamlit</div>',
+        unsafe_allow_html=True,
+    )
+    st.stop()
 
 st.title("Project Delta")
 st.caption("BQ Revision Comparison Tool · V1.1")
@@ -73,7 +337,7 @@ with st.sidebar:
 
     st.markdown("#### 데이터 입력")
     use_demo = st.checkbox(
-        "샘플 데이터로 체험하기", value=False,
+        "샘플 데이터로 체험하기", key="use_demo",
         help="회사 데이터를 익명화한 샘플 BQ로 모든 탭 기능을 바로 확인할 수 있습니다.",
     )
     if use_demo:
@@ -343,8 +607,8 @@ except Exception as exc:  # noqa: BLE001
 generated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 ts = datetime.now().strftime("%Y%m%d_%H%M")
 
-tab_summary, tab_qty, tab_rate, tab_major, tab_report = st.tabs(
-    ["Summary", "Quantity Changes", "Rate / Cost Changes", "Major Items", "Report / Copy"]
+tab_summary, tab_major, tab_report, tab_qty, tab_rate = st.tabs(
+    ["Summary", "Major Items", "Report / Copy", "Quantity Changes", "Rate / Cost Changes"]
 )
 
 # ============================== Summary =======================================
@@ -430,20 +694,75 @@ with tab_rate:
     summary_t = _counts.to_frame("Changed Count").T   # 1행(Changed Count) × 항목 컬럼
     st.dataframe(summary_t, use_container_width=True)
 
-    _counts_df = _counts.rename_axis("Compare Item").reset_index(name="Changed Count")
-    if _counts_df["Changed Count"].sum() > 0:
-        _rate_chart = (
-            alt.Chart(_counts_df)
-            .mark_bar(cornerRadiusTopRight=4, cornerRadiusBottomRight=4)
+    # --- Description별 단가(Total U/P) 변동 차트 -------------------------------
+    # FWBS가 달라도 Description이 같으면 같은 아이템으로 묶어 Previous/Revised 단가 비교.
+    # 같은 Description인데 단가쌍이 다르면 (1),(2)… 로 분리하고 소수 그룹은 확인 경고.
+    _tup = rate_result[(rate_result["Compare_Item"] == "Total U/P")
+                       & (rate_result["Change_Type"] == "Changed")].copy()
+    _tup["_desc"] = _tup["Description"].astype(str).str.strip()
+    _n_blank = int((_tup["_desc"] == "").sum())
+    _tup = _tup[_tup["_desc"] != ""]
+
+    if not _tup.empty:
+        st.markdown("##### Description별 단가(Total U/P) 변동")
+        st.caption("FWBS가 달라도 Description이 같으면 같은 아이템으로 묶어 표시합니다. "
+                   "같은 Description인데 단가가 다르면 (1), (2)… 로 구분합니다.")
+
+        def _desc_label(d):
+            dl = d.lower()
+            # Above/Below Water Level 은 Excavation 하위항목 → 표시명에 prefix
+            if dl.startswith("above water level") or dl.startswith("below water level"):
+                return "Excavation " + d
+            return d
+
+        _rows, _warns = [], []
+        for _d, _g in _tup.groupby("_desc"):
+            _pairs = pd.Series(
+                list(zip(_g["Previous_Value"].round(4), _g["Revised_Value"].round(4))),
+                index=_g.index)
+            _vc = _pairs.value_counts()          # 다수 단가 그룹부터
+            _multi = len(_vc) > 1
+            for _i, (_pair, _cnt) in enumerate(_vc.items(), 1):
+                _label = _desc_label(_d) + (f" ({_i})" if _multi else "")
+                _rows.append({"Item": _label, "구분": "Previous",
+                              "Total U/P": _pair[0], "FWBS 수": int(_cnt)})
+                _rows.append({"Item": _label, "구분": "Revised",
+                              "Total U/P": _pair[1], "FWBS 수": int(_cnt)})
+                if _multi and _i > 1:            # 소수 단가 그룹 → 단가 확인 필요
+                    _codes = _g.loc[_pairs[_pairs == _pair].index, "FWBS"].tolist()
+                    _warns.append((_label, _codes))
+
+        _cdf = pd.DataFrame(_rows)
+        _n_items = _cdf["Item"].nunique()
+        _dchart = (
+            alt.Chart(_cdf)
+            .mark_bar()
             .encode(
-                x=alt.X("Changed Count:Q", title=None),
-                y=alt.Y("Compare Item:N", sort="-x", title=None),
-                color=alt.value("#5b6cff"),
-                tooltip=["Compare Item", "Changed Count"],
+                y=alt.Y("Item:N", title=None,
+                        sort=alt.EncodingSortField(field="Total U/P",
+                                                   op="max", order="descending")),
+                yOffset=alt.YOffset("구분:N", sort=["Previous", "Revised"]),
+                x=alt.X("Total U/P:Q", title=None),
+                color=alt.Color(
+                    "구분:N",
+                    scale=alt.Scale(domain=["Previous", "Revised"],
+                                    range=["#b9c0d4", "#5b6cff"]),
+                    legend=alt.Legend(orient="top", title=None)),
+                tooltip=["Item", "구분",
+                         alt.Tooltip("Total U/P:Q", format=",.2f"), "FWBS 수"],
             )
-            .properties(height=280)
+            .properties(height=max(240, 32 * _n_items))
         )
-        st.altair_chart(_rate_chart, use_container_width=True)
+        st.altair_chart(_dchart, use_container_width=True)
+
+        for _label, _codes in _warns:
+            st.markdown(
+                f'<div style="color:#c0392b; font-size:0.9rem; margin:2px 0;">'
+                f'⚠️ <b>{html.escape(_label)}</b> · FWBS: '
+                f'{html.escape(", ".join(_codes))} — 단가 확인 필요.</div>',
+                unsafe_allow_html=True)
+        if _n_blank:
+            st.caption(f"Description이 비어 있는 {_n_blank}개 변경 행은 차트에서 제외했습니다.")
 
     f1, f2, f3, f4 = st.columns([2, 2.4, 2, 1.6])
     r_fwbs = f1.text_input("FWBS 검색", key="r_fwbs")
