@@ -60,145 +60,50 @@ st.markdown(
       }
 
       /* ---- 랜딩(첫 화면) 전용 ------------------------------------------ */
+      .pd-topbar {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 6px 4px 0 4px;
+      }
+      .pd-topbar .pd-brand {
+        font-size: 1.05rem; font-weight: 800; color: #16336b; letter-spacing: .01em;
+      }
+      .pd-topbar .pd-author {
+        font-size: .9rem; font-weight: 600; color: #64748b;
+      }
       .pd-hero {
-        text-align: center;
-        padding: 40px 0 8px 0;
+        text-align: center; padding: 58px 0 6px 0; position: relative; z-index: 1;
       }
       .pd-hero-label {
-        font-size: .8rem;
-        letter-spacing: .34em;
-        color: #2563eb;
-        font-weight: 700;
+        font-size: .8rem; letter-spacing: .34em; color: #2563eb; font-weight: 700;
       }
       .pd-hero-title {
-        font-size: 3.5rem;
-        font-weight: 800;
-        line-height: 1.1;
-        margin-top: 14px;
-        background: linear-gradient(90deg, #16336b 0%, #2563eb 65%, #3b82f6 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-      .pd-hero-author {
-        font-size: .95rem;
-        color: #64748b;
-        font-weight: 600;
-        margin-top: 10px;
+        font-size: 4rem; font-weight: 800; line-height: 1.08; margin-top: 16px;
+        background: linear-gradient(90deg, #16336b 0%, #2563eb 60%, #3b82f6 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
       }
       .pd-hero-subtitle {
-        font-size: 1.12rem;
-        color: #1e293b;
-        font-weight: 600;
-        margin-top: 20px;
-        line-height: 1.6;
+        font-size: 1.15rem; color: #1e293b; font-weight: 600;
+        margin: 22px auto 0 auto; line-height: 1.6; max-width: 720px;
       }
       .pd-hero-desc {
-        font-size: .98rem;
-        color: #64748b;
-        margin-top: 12px;
-        line-height: 1.7;
-        max-width: 760px;
-        margin-left: auto;
-        margin-right: auto;
+        font-size: .97rem; color: #64748b;
+        margin: 14px auto 0 auto; line-height: 1.7; max-width: 680px;
       }
-
-      .pd-section-title {
-        font-size: .78rem;
-        letter-spacing: .22em;
-        text-transform: uppercase;
-        color: #94a3b8;
-        font-weight: 700;
-        margin: 4px 0 14px 2px;
+      .pd-chips {
+        display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+        margin-top: 28px;
       }
-
-      /* 효능 카드 */
-      .pd-benefit {
-        background: #ffffff;
-        border: 1px solid #e6eaf1;
-        border-radius: 14px;
-        padding: 18px 18px;
-        box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
-        height: 100%;
+      .pd-chip {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: rgba(255, 255, 255, .78); border: 1px solid #e2e8f2;
+        border-radius: 999px; padding: 9px 18px;
+        font-size: .9rem; font-weight: 600; color: #334155;
+        box-shadow: 0 1px 3px rgba(16, 24, 40, .05);
       }
-      .pd-benefit .pd-ico {
-        width: 40px; height: 40px;
-        display: flex; align-items: center; justify-content: center;
-        border-radius: 10px;
-        background: #eef4ff;
-        color: #2563eb;
-        font-size: 1.15rem;
-        margin-bottom: 12px;
-      }
-      .pd-benefit .pd-bt {
-        font-size: .96rem; font-weight: 700; color: #16233c;
-        line-height: 1.35; word-break: keep-all;
-      }
-
-      /* Impact metric */
-      .pd-metric {
-        background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
-        border: 1px solid #e2e8f2;
-        border-radius: 14px;
-        padding: 18px 20px;
-        box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
-        height: 100%;
-      }
-      .pd-metric .pd-mv {
-        font-size: 2.05rem; font-weight: 800; line-height: 1.1;
-        color: #16336b;
-      }
-      .pd-metric .pd-ml {
-        font-size: .82rem; color: #64748b; margin-top: 6px; font-weight: 500;
-      }
-
-      /* Workflow step */
-      .pd-step {
-        background: #ffffff;
-        border: 1px solid #e6eaf1;
-        border-radius: 14px;
-        padding: 18px 18px 20px 18px;
-        box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
-        height: 100%;
-        position: relative;
-      }
-      .pd-step .pd-num {
-        font-size: .78rem; font-weight: 800; color: #93a4c4;
-        letter-spacing: .08em;
-      }
-      .pd-step .pd-sico {
-        font-size: 1.35rem; margin: 8px 0 8px 0;
-      }
-      .pd-step .pd-stt {
-        font-size: .98rem; font-weight: 700; color: #16233c;
-      }
-      .pd-step .pd-sd {
-        font-size: .84rem; color: #64748b; margin-top: 5px; line-height: 1.45;
-      }
-
-      /* Feature 카드 (재디자인) */
-      .pd-feat {
-        background: #ffffff;
-        border: 1px solid #e6eaf1;
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 2px 8px rgba(16, 24, 40, 0.05);
-        height: 100%;
-        border-top: 3px solid #2563eb;
-      }
-      .pd-feat .pd-ft {
-        font-size: 1.02rem; font-weight: 700; color: #16233c;
-      }
-      .pd-feat .pd-fd {
-        font-size: .86rem; color: #64748b; margin-top: 8px; line-height: 1.5;
-      }
-
+      .pd-chip .pd-cico { color: #2563eb; font-size: 1rem; }
       .pd-note {
-        text-align: center;
-        font-size: .8rem;
-        color: #94a3b8;
-        margin-top: 8px;
-        line-height: 1.6;
+        text-align: center; font-size: .8rem; color: #94a3b8;
+        margin-top: 8px; line-height: 1.6;
       }
     </style>
     """,
@@ -210,98 +115,82 @@ if "pd_started" not in st.session_state:
     st.session_state.pd_started = False
 
 if not st.session_state.pd_started:
+    # ---- 랜딩 전용 배경 / 버튼 스타일 (첫 화면에서만 주입 → 메인 앱은 기본 흰 배경) --
+    st.markdown(
+        """
+        <style>
+          .stApp {
+            background:
+              radial-gradient(1100px 620px at 10% 6%, rgba(191,219,254,.45), transparent 55%),
+              radial-gradient(1000px 680px at 92% 10%, rgba(199,210,254,.40), transparent 55%),
+              radial-gradient(900px 600px at 82% 96%, rgba(186,230,253,.32), transparent 55%),
+              linear-gradient(180deg, #fbfdff 0%, #eef3fb 100%);
+          }
+          header[data-testid="stHeader"] { background: transparent; }
+          .stApp::before, .stApp::after {
+            content: ""; position: absolute; z-index: 0; pointer-events: none;
+          }
+          .stApp::before {
+            top: -130px; right: -70px; width: 420px; height: 420px;
+            background: linear-gradient(135deg, rgba(147,197,253,.34), rgba(196,181,253,.22));
+            clip-path: polygon(50% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%);
+          }
+          .stApp::after {
+            bottom: -150px; left: -110px; width: 360px; height: 360px;
+            background: linear-gradient(135deg, rgba(191,219,254,.30), rgba(165,243,252,.20));
+            clip-path: polygon(25% 0, 100% 25%, 75% 100%, 0 75%);
+          }
+          .block-container { position: relative; z-index: 1; }
+          .stButton > button[kind="primary"] {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            border: none; color: #fff; font-weight: 700; border-radius: 12px;
+            box-shadow: 0 8px 18px rgba(37, 99, 235, .28);
+          }
+          .stButton > button[kind="primary"]:hover { filter: brightness(1.06); }
+          .stButton > button[kind="secondary"] {
+            background: #ffffff; border: 1px solid #cbd5e1; color: #1e293b;
+            font-weight: 600; border-radius: 12px;
+          }
+          .stButton > button[kind="secondary"]:hover { border-color: #2563eb; color: #2563eb; }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # ---- Top header ----------------------------------------------------------
+    st.markdown(
+        '<div class="pd-topbar"><span class="pd-brand">Project Delta</span>'
+        '<span class="pd-author">By. Soyoung Katie Park</span></div>',
+        unsafe_allow_html=True,
+    )
+
     # ---- Hero ----------------------------------------------------------------
     st.markdown(
         """
         <div class="pd-hero">
           <div class="pd-hero-label">BQ REVISION COMPARISON</div>
           <div class="pd-hero-title">Project Delta</div>
-          <div class="pd-hero-author">By. Soyoung Katie Park</div>
           <div class="pd-hero-subtitle">
             Previous / Revised Civil BQ를 자동 비교해 물량·단가·금액 영향과<br>
             Rate Consistency 이슈를 한 화면에서 검토하는 Cost Review Dashboard
+          </div>
+          <div class="pd-hero-desc">
+            복잡한 Civil BQ Revision 검토를 자동화해 반복 비교 시간을 줄이고,
+            주요 변경사항과 단가 불일치 검토 포인트를 빠르게 확인합니다.
+          </div>
+          <div class="pd-chips">
+            <span class="pd-chip"><span class="pd-cico">⚖</span> Quantity · Rate · Cost 자동 비교</span>
+            <span class="pd-chip"><span class="pd-cico">🔍</span> Rate Consistency 이슈 식별</span>
+            <span class="pd-chip"><span class="pd-cico">📄</span> Report-ready Summary 즉시 활용</span>
           </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    # ---- 효능/효과 카드 -------------------------------------------------------
-    st.write("")
-    _benefits = [
-        ("⏱", "반복 비교 작업<br>시간 단축"),
-        ("⚠", "주요 단가 불일치<br>자동 식별"),
-        ("📊", "Major Item 중심<br>금액 영향 검토"),
-        ("📄", "보고용 Summary / TSV<br>즉시 활용"),
-    ]
-    for col, (icon, t) in zip(st.columns(4), _benefits):
-        col.markdown(
-            f'<div class="pd-benefit">'
-            f'<div class="pd-ico">{icon}</div>'
-            f'<div class="pd-bt">{t}</div></div>',
-            unsafe_allow_html=True,
-        )
-
-    # ---- Impact Metrics ------------------------------------------------------
-    st.write("")
-    st.write("")
-    st.markdown('<div class="pd-section-title">Impact Metrics · sample data</div>',
-                unsafe_allow_html=True)
-    _metrics = [
-        ("5,000+", "BOQ Rows Analyzed"),
-        ("8", "Cost Components Checked"),
-        ("567", "Dummy Rows Filtered"),
-        ("1", "Rate Mismatch Detected"),
-    ]
-    for col, (v, l) in zip(st.columns(4), _metrics):
-        col.markdown(
-            f'<div class="pd-metric"><div class="pd-mv">{v}</div>'
-            f'<div class="pd-ml">{l}</div></div>',
-            unsafe_allow_html=True,
-        )
-
-    # ---- Workflow ------------------------------------------------------------
-    st.write("")
-    st.write("")
-    st.markdown('<div class="pd-section-title">How it works</div>',
-                unsafe_allow_html=True)
-    _steps = [
-        ("01", "⬆", "Upload", "Previous / Revised BQ 업로드"),
-        ("02", "⇄", "Compare", "FWBS, PABS, Unit Rate 기준 자동 비교"),
-        ("03", "🔍", "Review", "Major Item, Rate Consistency, Cost Impact 검토"),
-        ("04", "📋", "Report", "보고용 Summary / TSV 복사"),
-    ]
-    for col, (num, icon, t, d) in zip(st.columns(4), _steps):
-        col.markdown(
-            f'<div class="pd-step"><div class="pd-num">STEP {num}</div>'
-            f'<div class="pd-sico">{icon}</div>'
-            f'<div class="pd-stt">{t}</div>'
-            f'<div class="pd-sd">{d}</div></div>',
-            unsafe_allow_html=True,
-        )
-
-    # ---- 기능 카드 (재디자인) -------------------------------------------------
-    st.write("")
-    st.write("")
-    st.markdown('<div class="pd-section-title">What you get</div>',
-                unsafe_allow_html=True)
-    _features = [
-        ("Quantity Changes", "FWBS × PABS 기준 물량 변경 추적"),
-        ("Rate / Cost", "Manhour, Labor, Material, Equipment 등 단가 변경 분석"),
-        ("Major Items", "대표 공종별 물량 · 단가 · 금액 영향 요약"),
-        ("Report / Copy", "보고용 검토 결과 복사"),
-    ]
-    for col, (t, d) in zip(st.columns(4), _features):
-        col.markdown(
-            f'<div class="pd-feat"><div class="pd-ft">{t}</div>'
-            f'<div class="pd-fd">{d}</div></div>',
-            unsafe_allow_html=True,
-        )
-
     # ---- CTA 버튼 ------------------------------------------------------------
     st.write("")
-    st.write("")
-    bc = st.columns([1.3, 1, 1, 1.3])
+    bc = st.columns([1.4, 1, 1, 1.4])
     with bc[1]:
         if st.button("샘플 데이터로 시연하기", type="primary", use_container_width=True):
             st.session_state.pd_started = True
@@ -314,6 +203,7 @@ if not st.session_state.pd_started:
             st.rerun()
 
     # ---- 하단 note -----------------------------------------------------------
+    st.write("")
     st.write("")
     st.markdown(
         '<div class="pd-note">Local-first prototype&nbsp;·&nbsp;'
